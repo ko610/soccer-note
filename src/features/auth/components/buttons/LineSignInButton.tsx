@@ -2,7 +2,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { getAdditionalUserInfo, signInWithPopup, OAuthProvider } from 'firebase/auth';
 import { Box, Typography, Button } from '@mui/material';
-import { auth } from '@/lib/firebase/config';
+// import { auth } from '@/lib/firebase/config';
 
 type PageProps = {
     setIsLoading: (isLoading: boolean) => void,
@@ -28,21 +28,21 @@ export default function LineSignInButton({ setIsLoading, setError }: PageProps) 
 
     // Lineでログイン
     const LineSignIn = async () => {
-        setIsLoading(true);
-        const provider = new OAuthProvider('oidc.line');
+        // setIsLoading(true);
+        // const provider = new OAuthProvider('oidc.line');
 
-        try {
-            const res = await signInWithPopup(auth, provider);
-            if (getAdditionalUserInfo(res)?.isNewUser) {
-                localStorage.setItem('isNewUser', "true");
-                localStorage.setItem('isNewCreateBoard', "true");
-            }
-            setIsLoading(false);
-        } catch (error) {
-            console.error(error);
-            setError(true);
-            setIsLoading(false);
-        }
+        // try {
+        //     const res = await signInWithPopup(auth, provider);
+        //     if (getAdditionalUserInfo(res)?.isNewUser) {
+        //         localStorage.setItem('isNewUser', "true");
+        //         localStorage.setItem('isNewCreateBoard', "true");
+        //     }
+        //     setIsLoading(false);
+        // } catch (error) {
+        //     console.error(error);
+        //     setError(true);
+        //     setIsLoading(false);
+        // }
     }
 
     return (

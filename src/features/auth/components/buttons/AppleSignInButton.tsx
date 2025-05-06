@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 import { signInWithPopup, OAuthProvider, getAdditionalUserInfo } from "firebase/auth"
-import { auth } from "@/lib/firebase/config"
 import Image from "next/image"
 import { Box, Button, Typography } from '@mui/material';
+// import { auth } from "@/lib/firebase/config"
 
 type PageProps = {
     setIsLoading: (isLoading: boolean) => void,
@@ -32,21 +32,21 @@ export default function AppleSignInButton({ setIsLoading, setError }: PageProps)
 
     // Appleでログイン
     const AppleSignIn = async () => {
-        setIsLoading(true)
-        const AppleProvider = new OAuthProvider('apple.com');
+        // setIsLoading(true)
+        // const AppleProvider = new OAuthProvider('apple.com');
     
-        await signInWithPopup(auth, AppleProvider)
-            .then((res) => {
-                if (getAdditionalUserInfo(res)?.isNewUser) {
-                    localStorage.setItem('isNewUser', "true");
-                    localStorage.setItem('isNewCreateBoard', "true");
-                }
-                setIsLoading(false)
-            }).catch((error) => {
-                console.log(error)
-                setError(true)
-                setIsLoading(false)
-            });
+        // await signInWithPopup(auth, AppleProvider)
+        //     .then((res) => {
+        //         if (getAdditionalUserInfo(res)?.isNewUser) {
+        //             localStorage.setItem('isNewUser', "true");
+        //             localStorage.setItem('isNewCreateBoard', "true");
+        //         }
+        //         setIsLoading(false)
+        //     }).catch((error) => {
+        //         console.log(error)
+        //         setError(true)
+        //         setIsLoading(false)
+        //     });
     }
 
     return (
