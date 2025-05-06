@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import { getAdditionalUserInfo, signInWithPopup, OAuthProvider } from 'firebase/auth';
-import { Typography, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import { auth } from '@/lib/firebase/config';
 
 type PageProps = {
@@ -13,7 +13,7 @@ const loginBtnStyle = {
     height: "42px",
     width: "100%",
     m: "8px 0",
-    bgColor: "#06C755",
+    backgroundColor: "#06C755",
     display: "flex",
     color: "white",
     fontSize: "14px",
@@ -46,8 +46,8 @@ export default function LineSignInButton({ setIsLoading, setError }: PageProps) 
     }
 
     return (
-        <Button onClick={() => { LineSignIn() }} style={loginBtnStyle}>
-            <span className="icon" style={{ marginRight: "10px", marginBottom: 2 }}><Icon /></span>
+        <Button onClick={() => { LineSignIn() }} sx={loginBtnStyle}>
+            <Box component="span" sx={{ mr: "10px" }}><Icon /></Box>
             <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 600, color: "white", textTransform: "capitalize" }}>
                 LINEではじめる
             </Typography>

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Image from "next/image"
 import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth"
-import { Button, Typography } from '@mui/material/';
+import { Box, Button, Typography } from '@mui/material/';
 import { auth } from "@/lib/firebase/config"
 
 type PageProps = {
@@ -51,8 +51,8 @@ export default function GoogleSignInButton({ setIsLoading, setError }: PageProps
     }
 
     return (
-        <Button onClick={() => { GoogleSignIn() }} style={loginBtnStyle}>
-            <span className="icon" style={{ marginRight: "10px", marginBottom: 2 }}><Icon /></span>
+        <Button onClick={() => { GoogleSignIn() }} sx={loginBtnStyle}>
+            <Box component="span" sx={{ mr: "10px" }}><Icon /></Box>
             <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 600, color: "#7F7F7F", textTransform: "capitalize" }}>
                 Googleではじめる
             </Typography>

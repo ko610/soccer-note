@@ -4,8 +4,7 @@ import * as React from 'react';
 import { signInWithPopup, OAuthProvider, getAdditionalUserInfo } from "firebase/auth"
 import { auth } from "@/lib/firebase/config"
 import Image from "next/image"
-import { useRouter } from 'next/navigation'
-import { Button, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 type PageProps = {
     setIsLoading: (isLoading: boolean) => void,
@@ -16,7 +15,7 @@ const loginBtnStyle = {
     height: "42px",
     width: "100%",
     m: "8px 0",
-    bgColor: "black",
+    backgroundColor: "black",
     display: "flex",
     color: "white",
     fontSize: "14px",
@@ -51,8 +50,8 @@ export default function AppleSignInButton({ setIsLoading, setError }: PageProps)
     }
 
     return (
-        <Button onClick={() => { AppleSignIn() }} style={loginBtnStyle}>
-            <span className="icon" style={{ marginRight: "10px", marginBottom: 2 }}><Icon /></span>
+        <Button onClick={() => { AppleSignIn() }} sx={loginBtnStyle}>
+            <Box component="span" sx={{ mr: "10px" }}><Icon /></Box>
             <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 600, color: "white", textTransform: "capitalize" }}>
                 Appleではじめる
             </Typography>
