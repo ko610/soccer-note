@@ -1,15 +1,13 @@
 "use client"
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Box, Typography } from '@mui/material/';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-export default function DefaultBrowserModal() {
-
+export default function OpenInBrowserGuide() {
     return (
-        <Box sx={{ width: "100%", }}>
+        <Box sx={{ width: "100%" }}>
             <Box sx={{ mb: 3 }}>
                 <Typography variant="body1" sx={{ color: "black", fontSize: 14, fontWeight: 400 }}>
                     Instagramからご利用の方は、以下の方法でブラウザからご利用ください。

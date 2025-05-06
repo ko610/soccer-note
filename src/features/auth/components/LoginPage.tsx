@@ -6,7 +6,7 @@ import LoadingPage from '@/components/LoadingPage';
 import GoogleSignInButton from '@/features/auth/components/buttons/GoogleSignInButton';
 import AppleSignInButton from '@/features/auth/components/buttons/AppleSignInButton';
 import LineSignInButton from '@/features/auth/components/buttons/LineSignInButton';
-import DefaultBrowserModal from '@/features/auth/components/DefaultBrowserModal';
+import OpenInBrowserGuide from '@/features/auth/components/OpenInBrowserGuide';
 
 export default function LoginPage() {
     const [isInstagramWebBrowser, setIsInstagramWebBrowser] = React.useState(false)
@@ -56,7 +56,7 @@ export default function LoginPage() {
                                 </Typography>
                             </Stack>
                             {isInstagramWebBrowser
-                                ? <DefaultBrowserModal />
+                                ? <OpenInBrowserGuide />
                                 : <Box>
                                     <Box sx={{ mb: 3 }}>
                                         <Typography variant="h5" sx={{ textAlign: "center", fontSize: "20px", fontWeight: 400, color: "black" }}>
