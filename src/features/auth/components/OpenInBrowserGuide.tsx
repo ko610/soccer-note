@@ -1,9 +1,7 @@
-"use client"
-
-import * as React from 'react';
-import { Box, Typography } from '@mui/material/';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import LaunchIcon from '@mui/icons-material/Launch';
+import * as React from "react";
+import { Box, Typography } from "@mui/material";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 export default function OpenInBrowserGuide() {
     return (

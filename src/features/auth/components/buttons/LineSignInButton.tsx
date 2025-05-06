@@ -1,8 +1,7 @@
-import * as React from 'react';
-import Image from 'next/image';
-import { getAdditionalUserInfo, signInWithPopup, OAuthProvider } from 'firebase/auth';
-import { Box, Typography, Button } from '@mui/material';
-// import { auth } from '@/lib/firebase/config';
+import * as React from "react";
+import Image from "next/image";
+import { getAdditionalUserInfo, signInWithPopup, OAuthProvider } from "firebase/auth";
+import { Box, Typography, Button } from "@mui/material";
 
 type PageProps = {
     setIsLoading: (isLoading: boolean) => void,

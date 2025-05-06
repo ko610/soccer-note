@@ -1,10 +1,7 @@
-"use client"
-
-import * as React from 'react';
-import { signInWithPopup, OAuthProvider, getAdditionalUserInfo } from "firebase/auth"
+import * as React from "react";
 import Image from "next/image"
-import { Box, Button, Typography } from '@mui/material';
-// import { auth } from "@/lib/firebase/config"
+import { signInWithPopup, OAuthProvider, getAdditionalUserInfo } from "firebase/auth"
+import { Box, Button, Typography } from "@mui/material";
 
 type PageProps = {
     setIsLoading: (isLoading: boolean) => void,
