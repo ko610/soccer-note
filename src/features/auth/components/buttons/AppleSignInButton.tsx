@@ -1,7 +1,7 @@
-import Image from "next/image"
-import { signInWithPopup, OAuthProvider, getAdditionalUserInfo } from "firebase/auth"
-import { Box, Button, Typography } from "@mui/material";
-import { auth } from "@/lib/firebase/config";
+import Image from 'next/image';
+import { signInWithPopup, OAuthProvider, getAdditionalUserInfo } from 'firebase/auth';
+import { Box, Button, Typography } from '@mui/material';
+import { auth } from '@/lib/firebase/config';
 
 type PageProps = {
     setIsLoading: (isLoading: boolean) => void,

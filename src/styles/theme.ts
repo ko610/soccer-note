@@ -10,6 +10,9 @@ export const theme = createTheme({
     secondary: {
       main: '#f50057',
     },
+    text: {
+      primary: '#000000',
+    },
   },
   typography: {
     fontFamily: 'var(--font-geist-sans), sans-serif',

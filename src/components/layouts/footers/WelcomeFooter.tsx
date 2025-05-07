@@ -1,9 +1,8 @@
 "use client"
 
-import * as React from 'react';
 import { Typography, Button, Stack, Grid, Box, Divider } from '@mui/material';
 
-export default function InfoFooter() {
+export default function WelcomeFooter() {
     return (
         <Box sx={{ position: "sticky", left: 0, right: 0, bottom: 0, width: "100%", zIndex: 100 }}>
             <Divider />
