@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Container, Typography, Box, Stack, CardMedia } from "@mui/material";
-import LoadingPage from "@/components/LoadingPage";
+import LoadingPage from "@/components/ui/LoadingPage";
 import GoogleSignInButton from "@/features/auth/components/buttons/GoogleSignInButton";
 import AppleSignInButton from "@/features/auth/components/buttons/AppleSignInButton";
 import LineSignInButton from "@/features/auth/components/buttons/LineSignInButton";
