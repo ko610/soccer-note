@@ -9,12 +9,14 @@ export default function LoadingPage() {
             sx={{
                 width: "100%",
                 height: "100vh",
+                left: 0,
                 overflow: "hidden",
                 position: "fixed",
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                bgcolor: "white"
+                bgcolor: "white",
+                zIndex: 1000
             }}
         >
             <Image

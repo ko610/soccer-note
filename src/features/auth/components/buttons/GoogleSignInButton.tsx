@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth"
 import { Box, Button, Typography } from "@mui/material";
+import { auth } from "@/lib/firebase/config";
 
 type PageProps = {
     setIsLoading: (isLoading: boolean) => void,
@@ -26,24 +27,24 @@ export default function GoogleSignInButton({ setIsLoading, setError }: PageProps
 
     // Googleでログイン
     const GoogleSignIn = async () => {
-        // setIsLoading(true);
-        // const GoogleProvider = new GoogleAuthProvider();
-        // GoogleProvider.setCustomParameters({
-        //     prompt: "select_account"
-        // });
+        setIsLoading(true);
+        const GoogleProvider = new GoogleAuthProvider();
+        GoogleProvider.setCustomParameters({
+            prompt: "select_account"
+        });
 
-        // try {
-        //     const res = await signInWithPopup(auth, GoogleProvider);
-        //     if (getAdditionalUserInfo(res)?.isNewUser) {
-        //         localStorage.setItem('isNewUser', "true");
-        //         localStorage.setItem('isNewCreateBoard', "true");
-        //     }
-        //     setIsLoading(false);
-        // } catch (error) {
-        //     console.error(error);
-        //     setError(true);
-        //     setIsLoading(false);
-        // }
+        try {
+            const res = await signInWithPopup(auth, GoogleProvider);
+            if (getAdditionalUserInfo(res)?.isNewUser) {
+                localStorage.setItem('isNewUser', "true");
+                localStorage.setItem('isNewCreateBoard', "true");
+            }
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+            setError(true);
+            setIsLoading(false);
+        }
     }
 
     return (
