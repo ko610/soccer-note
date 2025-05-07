@@ -1,4 +1,3 @@
-import * as React from "react";
 import Image from "next/image"
 import { GoogleAuthProvider, getAdditionalUserInfo, signInWithPopup } from "firebase/auth"
 import { Box, Button, Typography } from "@mui/material";

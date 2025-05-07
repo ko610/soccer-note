@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { Container, Typography, Box, Stack, CardMedia } from "@mui/material";
 import LoadingPage from "@/components/LoadingPage";
 import GoogleSignInButton from "@/features/auth/components/buttons/GoogleSignInButton";
@@ -9,11 +9,11 @@ import LineSignInButton from "@/features/auth/components/buttons/LineSignInButto
 import OpenInBrowserGuide from '@/features/auth/components/OpenInBrowserGuide';
 
 export default function LoginPage() {
-    const [isInstagramWebBrowser, setIsInstagramWebBrowser] = React.useState(false)
-    const [isLoading, setIsLoading] = React.useState(false)
-    const [error, setError] = React.useState(false)
+    const [isInstagramWebBrowser, setIsInstagramWebBrowser] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(false)
 
-    React.useEffect(() => {
+    useEffect(() => {
         setIsInstagramWebBrowser(checkInstagramWebBrowser())
     }, [])
 
