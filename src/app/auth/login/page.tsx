@@ -4,9 +4,8 @@ import { Box } from '@mui/material';
 import LoadingPage from '@/components/ui/LoadingPage';
 import WelcomeFooter from '@/components/layouts/footers/WelcomeFooter';
 import LoginPage from '@/features/auth/components/LoginPage';
-import { useGetAuth } from '@/features/auth/hooks/useGetAuth';
-import { metadata } from '@/features/auth/metadata/metadata';
 import { useAuth } from '@/features/auth/contexts/AuthContext';
+import { metadata } from '@/features/auth/metadata/metadata';
 
 export default function Home() {
   const { user, isAuthLoading } = useAuth();

@@ -8,10 +8,10 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { theme } from '@/styles/theme';
 
 const barStyle = {
-    bgcolor: 'background.paper',
+    bgcolor: "white",
     width: { md: "90px", lg: "250px" },
     p: 0,
-    position: 'fixed',
+    position: "fixed",
     top: 0,
     left: 0,
     zIndex: "1100",
@@ -68,7 +68,7 @@ export default function LeftNavigationBar() {
                         </Stack>
 
                         <Button 
-                            sx={{ ...buttonStyle, color: value === 0 ? theme.palette.primary.main : "#666" }} 
+                            sx={{ ...buttonStyle, color: value === 0 ? theme.palette.text.primary : theme.palette.secondary.main }} 
                             onClick={() => handleNavigation('/note', 0)}
                         >
                             <Stack direction="row" justifyItems="center" alignItems="center">
@@ -80,7 +80,7 @@ export default function LeftNavigationBar() {
                         </Button>
 
                         <Button 
-                            sx={{ ...buttonStyle, color: value === 1 ? theme.palette.primary.main : "#666" }} 
+                            sx={{ ...buttonStyle, color: value === 1 ? theme.palette.text.primary : theme.palette.secondary.main }} 
                             onClick={() => handleNavigation('/setting', 1)}
                         >
                             <Stack direction="row" justifyItems="center" alignItems="center">
