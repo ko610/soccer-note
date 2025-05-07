@@ -1,6 +1,6 @@
 "use client"
 
-import { startOfMonth, addDays, subMonths, addMonths, format, isAfter, isBefore } from 'date-fns';
+import { startOfMonth, addDays, subMonths, addMonths, format, isAfter } from 'date-fns';
 import { AppBar, Typography, styled, Tabs, Tab, IconButton, Stack } from '@mui/material';
 import ArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -11,15 +11,15 @@ import { isToday } from '@/utils/date/isToday';
 import { theme } from '@/styles/theme';
 
 const barStyle = {
-    bgcolor: 'background.paper',
+    width: "100%",
+    bgcolor: "white",
     color: "black",
     mx: "auto",
-    position: 'fixed',
+    position: "fixed",
     zIndex: "100",
-    width: "100%",
     boxShadow: "none",
     borderBottom: "solid 1px rgb(219, 219, 219)",
-    pl: { md: "120px", lg: "250px" },
+    pl: { md: "90px", lg: "250px" },
     touchAction: "none"
 }
 

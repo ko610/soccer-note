@@ -1,18 +1,16 @@
 "use client"
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { Box } from '@mui/material';
 import LoadingPage from '@/components/ui/LoadingPage';
 import LeftNavigationBar from '@/components/layouts/navigationBar/LeftNavigationBar';
 import BottomNavigationBar from '@/components/layouts/navigationBar/BottomNavigationBar';
-import NoteHeader from '@/features/note/components/layouts/NoteHeader';
-import NoteMainContainer from '@/features/note/components/layouts/NoteMainContainer';
-import { useGetAuth } from '@/features/auth/hooks/useGetAuth';
+import SettingHeader from '@/features/setting/components/layouts/SettingHeader';
+import SettingMainContainer from '@/features/setting/components/layouts/SettingMainContainer';
 import { useAuth } from '@/features/auth/contexts/AuthContext';
+import SettingItemList from '@/features/setting/components/SettingItemList';
 
 export default function Home() {
-  const router = useRouter();
   const { user, isAuthLoading } = useAuth();
   const [date, setDate] = useState<Date>(new Date());
   const [displayMenu, setDisplayMenu] = useState<number>(0);
@@ -25,10 +23,12 @@ export default function Home() {
         :
         <Box sx={{ width: "100%" }}>
           <LeftNavigationBar />
-          <NoteHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} showCalendar={showCalendar} setShowCalendar={setShowCalendar} />
-          <NoteMainContainer>
-            <h1>Home</h1>
-          </NoteMainContainer>
+          <SettingHeader />
+
+          <SettingMainContainer>
+            <SettingItemList />
+          </SettingMainContainer>
+
           <BottomNavigationBar />
         </Box>
       }
