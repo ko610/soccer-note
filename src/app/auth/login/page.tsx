@@ -9,23 +9,10 @@ import WelcomeFooter from '@/components/layouts/footers/WelcomeFooter';
 import LoginPage from '@/features/auth/components/LoginPage';
 import { useGetAuth } from '@/features/auth/hooks/useGetAuth';
 import { metadata } from '@/features/auth/metadata/metadata';
+import { useAuth } from '@/features/auth/contexts/AuthContext';
 
-type PageProps = {
-  user: User
-  setUser: (user: User) => void
-  isAuthLoading: boolean
-}
-
-export default function Home({user, setUser, isAuthLoading}: PageProps) {
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isAuthLoading) {
-      if (user) {
-        router.push("/note");
-      }
-    }
-  }, [user, isAuthLoading]);
+export default function Home() {
+  const { user, isAuthLoading } = useAuth();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">

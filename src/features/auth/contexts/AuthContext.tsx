@@ -8,16 +8,16 @@ import { auth } from "@/lib/firebase/config";
 
 const AuthContext = createContext<{
   user: User | null;
-  isLoading: boolean;
+  isAuthLoading: boolean;
 }>({
   user: null,
-  isLoading: true,
+  isAuthLoading: true,
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
 
 
 useEffect(() => {
@@ -25,22 +25,22 @@ useEffect(() => {
         if (newUser) {
         setUser(newUser)
         }
-        setIsLoading(false)
+        setIsAuthLoading(false)
     })
     }, []);
 
     useEffect(() => {
-        if (!isLoading) {
+        if (!isAuthLoading) {
             if (user) {
                 router.push("/note");
             } else {
                 router.push("/auth/login");
             }
         }
-    }, [user, isLoading])
+    }, [user, isAuthLoading])
 
   return (
-    <AuthContext.Provider value={{ user, isLoading }}>
+    <AuthContext.Provider value={{ user, isAuthLoading }}>
       {children}
     </AuthContext.Provider>
   );

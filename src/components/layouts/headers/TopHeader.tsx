@@ -124,7 +124,7 @@ const StyledTab = styled((props: StyledTabProps) => (
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(15),
     marginRight: theme.spacing(1),
-    color: theme.palette.text.primary,
+    color: theme.palette.secondary.main,
     '&.Mui-selected': {
         color: theme.palette.primary.main,
     },
