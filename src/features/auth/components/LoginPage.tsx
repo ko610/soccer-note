@@ -1,11 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react";
-import { Container, Typography, Box, Stack, CardMedia } from "@mui/material";
-import LoadingPage from "@/components/LoadingPage";
-import GoogleSignInButton from "@/features/auth/components/buttons/GoogleSignInButton";
-import AppleSignInButton from "@/features/auth/components/buttons/AppleSignInButton";
-import LineSignInButton from "@/features/auth/components/buttons/LineSignInButton";
+import { useEffect, useState } from 'react';
+import { Container, Typography, Box, Stack, CardMedia } from '@mui/material';
+import LoadingPage from '@/components/ui/LoadingPage';
+import GoogleSignInButton from '@/features/auth/components/buttons/GoogleSignInButton';
+import AppleSignInButton from '@/features/auth/components/buttons/AppleSignInButton';
+import LineSignInButton from '@/features/auth/components/buttons/LineSignInButton';
 import OpenInBrowserGuide from '@/features/auth/components/OpenInBrowserGuide';
 
 export default function LoginPage() {

@@ -1,21 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Box } from "@mui/material";
-import LoadingPage from "@/components/LoadingPage";
-import WelcomeFooter from "@/components/footers/WelcomeFooter";
-import LoginPage from "@/features/auth/components/LoginPage";
-import { useGetAuth } from "@/features/auth/hooks/useGetAuth";
-export default function Home() {
-  const router = useRouter();
-  const [user, setUser, isAuthLoading] = useGetAuth();
+import { Box } from '@mui/material';
+import LoadingPage from '@/components/ui/LoadingPage';
+import WelcomeFooter from '@/components/layouts/footers/WelcomeFooter';
+import LoginPage from '@/features/auth/components/LoginPage';
+import { useGetAuth } from '@/features/auth/hooks/useGetAuth';
+import { metadata } from '@/features/auth/metadata/metadata';
+import { useAuth } from '@/features/auth/contexts/AuthContext';
 
-  useEffect(() => {
-    if (user) {
-      router.push("/home");
-    }
-  }, [user]);
+export default function Home() {
+  const { user, isAuthLoading } = useAuth();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-white">

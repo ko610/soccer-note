@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import LaunchIcon from "@mui/icons-material/Launch";
+import { Box, Typography } from '@mui/material';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 export default function OpenInBrowserGuide() {
     return (
