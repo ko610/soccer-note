@@ -15,7 +15,7 @@ export default function Home() {
       {user != undefined ?
         <LoadingPage />
         :
-        <Box>
+        <Box sx={{ width: "100%" }}>
           <LoginPage />
           <WelcomeFooter />
         </Box>

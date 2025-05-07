@@ -5,7 +5,7 @@ import { Typography, Button, Stack, Grid, Box, Divider } from '@mui/material';
 
 export default function InfoFooter() {
     return (
-        <Box sx={{ position: "sticky", left: 0, right: 0, bottom: 0, width: "100%" }}>
+        <Box sx={{ position: "sticky", left: 0, right: 0, bottom: 0, width: "100%", zIndex: 100 }}>
             <Divider />
             <Stack
                 direction="row"
