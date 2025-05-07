@@ -1,8 +1,5 @@
 "use client"
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { User } from 'firebase/auth';
 import { Box } from '@mui/material';
 import LoadingPage from '@/components/ui/LoadingPage';
 import WelcomeFooter from '@/components/layouts/footers/WelcomeFooter';
