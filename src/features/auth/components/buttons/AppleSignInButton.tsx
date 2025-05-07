@@ -1,4 +1,3 @@
-import * as React from "react";
 import Image from "next/image"
 import { signInWithPopup, OAuthProvider, getAdditionalUserInfo } from "firebase/auth"
 import { Box, Button, Typography } from "@mui/material";
