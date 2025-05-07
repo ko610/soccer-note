@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ListItem, ListItemText, ListItemIcon, ListItemButton, Card } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSignOut } from "@/features/auth/hooks/useSignOut";
@@ -6,10 +7,11 @@ import ConfirmModal from "@/components/ui/ConfirmModal";
 import { confirmModalText } from "@/constants/ConfirmModalText";
 
 export default function LogoutButton() {
+    const router = useRouter()
     const [logoutModalOpen, setLogoutModalOpen] = useState<boolean>(false)
 
     const handleLogout = () => {
-        useSignOut()
+        useSignOut(router)
         setLogoutModalOpen(false)
     }
 
