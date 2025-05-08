@@ -11,8 +11,8 @@ import { useState } from 'react';
 import { PracticeModel } from '@/types/note/practice/Practice';
 
 type PageProps = {
-    allContents: NoteType[],
-    setContents: (contents: NoteType[]) => void,
+    allNotes: NoteType[],
+    setNotes: (notes: NoteType[]) => void,
     boards: any[],
     isLoading: boolean,
     setIsLoading: (isLoading: boolean) => void,
@@ -22,7 +22,7 @@ type PageProps = {
     setTabValue: (tabValue: number) => void,
 }
 
-export default function NoteFormBox({ allContents, setContents, boards, isLoading, setIsLoading, isCreate, setIsCreate, date, setTabValue }: PageProps) {
+export default function NoteFormBox({ allNotes, setNotes, boards, isLoading, setIsLoading, isCreate, setIsCreate, date, setTabValue }: PageProps) {
     const params = useParams()
     const router = useRouter()
     const [gameNote, setGameNote] = useState(new GameModel({date: date}));
@@ -32,9 +32,9 @@ export default function NoteFormBox({ allContents, setContents, boards, isLoadin
     const InsertNote = async (note: NoteType, selectedFiles: File[]) => {
         setIsLoading(true)
         await createNote(note, selectedFiles).then( async () => {
-            const resultContents = allContents.slice()
-            resultContents.unshift(note)
-            setContents([...resultContents])
+            const resultNotes = allNotes.slice()
+            resultNotes.unshift(note)
+            setNotes([...resultNotes])
             setTabValue(1)
             setIsLoading(false)
         })
@@ -42,7 +42,7 @@ export default function NoteFormBox({ allContents, setContents, boards, isLoadin
 
     return (
         <>
-            {!isLoading && isCreate && (
+            {!isLoading && menu === 0 && (
                 <GameForm 
                     gameNote={gameNote} 
                     postData={InsertNote} 
@@ -54,17 +54,17 @@ export default function NoteFormBox({ allContents, setContents, boards, isLoadin
                 />
             )}
 
-            {/* {!isLoading && menu === 1 && (
+            {!isLoading && menu === 1 && (
                 <PracticeForm 
                     practiceNote={practiceNote} 
                     postData={InsertNote} 
                     boards={boards} 
-                    onClose={() => setMenu(-1)} 
+                    onClose={() => setIsCreate(false)} 
                     isCreate={true} 
                     menu={menu} 
                     setMenu={setMenu} 
                 />
-            )} */}
+            )}
 
             {isLoading && (
                 <Stack direction="row" justifyContent="center" alignItems="center" sx={{backgroundColor: "#fbfbfb", borderRight: "solid 0.5px #b2b2b2", borderLeft: "solid 0.5px #b2b2b2", height: "100vh", overflowY: "hidden" }}>

@@ -44,10 +44,10 @@ export default function NoteTypeSelector({ alignment, setAlignment }: PageProps)
                     }
                 }}
             >
-                <ToggleButton value={0} aria-label="game" size="small" sx={{ fontSize: 12, mx: 2 }}>
+                <ToggleButton value={0} aria-label="game" size="small" sx={{ fontSize: 12, mx: 2, color: theme.palette.primary.main }}>
                     試合
                 </ToggleButton>
-                <ToggleButton value={1} aria-label="practice" size="small" sx={{ fontSize: 12, mx: 2 }}>
+                <ToggleButton value={1} aria-label="practice" size="small" sx={{ fontSize: 12, mx: 2, color: theme.palette.primary.main }}>
                     練習
                 </ToggleButton>
             </ToggleButtonGroup>

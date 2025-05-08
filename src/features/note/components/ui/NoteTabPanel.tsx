@@ -30,10 +30,12 @@ function CustomTabPanel(props: TabPanelProps) {
 export default function NoteTabPanel() {
     const { notes, setNotes, boards, isLoading, setIsLoading, isCreate, setIsCreate, date, tabValue, setTabValue } = useNoteTabPanelContext();
     
+    console.log(tabValue)
+
     return (
         <>
             <CustomTabPanel value={tabValue} index={0}>
-                <NoteFormBox allContents={notes} setContents={setNotes} boards={boards} isLoading={isLoading} setIsLoading={setIsLoading} isCreate={isCreate} setIsCreate={setIsCreate} date={date} setTabValue={setTabValue} />
+                <NoteFormBox allNotes={notes} setNotes={setNotes} boards={boards} isLoading={isLoading} setIsLoading={setIsLoading} isCreate={isCreate} setIsCreate={setIsCreate} date={date} setTabValue={setTabValue} />
             </CustomTabPanel>
 
             {notes.map((value: NoteType, index: number) => (

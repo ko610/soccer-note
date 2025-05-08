@@ -84,7 +84,7 @@ export default function NoteTabs({ notes, tabValue, setTabValue, setIsCreate }: 
                     iconPosition="start"
                     label="新規作成"
                     onClick={() => setIsCreate(true)}
-                    sx={{ fontSize: 13, color: theme.palette.primary.main }}
+                    sx={{ fontSize: 13, '&.Mui-selected': { color: theme.palette.primary.main } }}
                 />
                 {notes.map((value: NoteType, index: number) => (
                     <Tab 

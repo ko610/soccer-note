@@ -22,10 +22,7 @@ type PageProps = {
     date: Date,
 }
 
-
-
-
-export default function NoteSwitcher({ notes, setNotes, boards, date }: PageProps) {
+    export default function NoteSwitcher({ notes, setNotes, boards, date }: PageProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [tabValue, setTabValue] = useState(0);
     const [isCreate, setIsCreate] = useState(false)
