@@ -65,10 +65,10 @@ export class GameModel implements GameType {
         this.position = data.position || "";
         this.goodPoints = Array.isArray(data.goodPoints)
             ? data.goodPoints.map((item: any) => item.context ?? item) // 旧型 or 新型両対応
-            : [];
+            : [""];
         this.badPoints = Array.isArray(data.badPoints)
             ? data.badPoints.map((item: any) => item.context ?? item) // 旧型 or 新型両対応
-            : [];
+            : [""];
         this.next = data.next || "";
         this.comment = data.comment || "";
         this.images = data.images || [];

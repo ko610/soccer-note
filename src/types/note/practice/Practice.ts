@@ -49,13 +49,13 @@ export class PracticeModel implements PracticeType {
         this.place = data.place || "";
         this.details = data.details || Array.isArray(data.details)
             ? data.details.map((item: any) => item.context ?? item) // 旧型 or 新型両対応
-            : [];
+            : [""];
         this.goodPoints = data.goodPoints || Array.isArray(data.goodPoints)
             ? data.goodPoints.map((item: any) => item.context ?? item) // 旧型 or 新型両対応
-            : [];
+            : [""];
         this.badPoints = data.badPoints || Array.isArray(data.badPoints)
             ? data.badPoints.map((item: any) => item.context ?? item) // 旧型 or 新型両対応
-            : [];
+            : [""];
         this.next = data.next || "";
         this.comment = data.comment || "";
         this.images = data.images || [];
