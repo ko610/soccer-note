@@ -25,9 +25,11 @@ export default function Home() {
         <Box sx={{ width: "100%" }}>
           <LeftNavigationBar />
           <NoteHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} showCalendar={showCalendar} setShowCalendar={setShowCalendar} />
-          <NoteMainContainer>
-            <NoteSwitcher notes={[]} setNotes={() => {}} boards={[]} date={date}  />
-          </NoteMainContainer>
+          {displayMenu == 0 &&
+            <NoteMainContainer>
+              <NoteSwitcher notes={[]} setNotes={() => {}} boards={[]} date={date} />
+            </NoteMainContainer>
+          }
           <BottomNavigationBar />
         </Box>
       }

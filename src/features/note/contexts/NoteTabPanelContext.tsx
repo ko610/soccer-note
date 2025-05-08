@@ -1,11 +1,9 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import type { NoteType } from "@/types/note/Note";
-import type { GameModel } from "@/types/note/game/Game";
-import type { PracticeModel } from "@/types/note/practice/Practice";
 
-// 型定義
+// コンテキスト型
 interface NoteTabPanelContextType {
   notes: NoteType[];
   setNotes: (notes: NoteType[]) => void;
@@ -15,25 +13,40 @@ interface NoteTabPanelContextType {
   setNoteCreateMenu: (val: number) => void;
   isLoading: boolean;
   setIsLoading: (val: boolean) => void;
-  date: string;
-  setDate: (val: string) => void;
-  boards: any[];
-  setBoards: (boards: any[]) => void;
+  date: Date;
   isCreate: boolean;
   setIsCreate: (val: boolean) => void;
 }
 
 const NoteTabPanelContext = createContext<NoteTabPanelContextType | undefined>(undefined);
 
-export const NoteTabPanelProvider = ({ children }: { children: ReactNode }) => {
-  const [notes, setNotes] = useState<NoteType[]>([]);
+// Providerのprops型
+type NoteTabPanelProviderProps = {
+  children: ReactNode;
+  notes: NoteType[];
+  setNotes: (notes: NoteType[]) => void;
+  boards: any[];
+  date: Date;
+};
+
+export const NoteTabPanelProvider = ({
+  children,
+  notes,
+  setNotes,
+  boards,
+  date,
+}: NoteTabPanelProviderProps) => {
   const [tabValue, setTabValue] = useState(0);
   const [noteCreateMenu, setNoteCreateMenu] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [date, setDate] = useState("");
-  const [boards, setBoards] = useState<any[]>([]);
   const [isCreate, setIsCreate] = useState(false);
-  
+
+  useEffect(() => {
+    const hasNotes = notes && notes.length > 0;
+    setTabValue(hasNotes ? 1 : 0);
+    setIsCreate(!hasNotes);
+  }, [date, notes]);
+
   return (
     <NoteTabPanelContext.Provider
       value={{
@@ -46,9 +59,6 @@ export const NoteTabPanelProvider = ({ children }: { children: ReactNode }) => {
         isLoading,
         setIsLoading,
         date,
-        setDate,
-        boards,
-        setBoards,
         isCreate,
         setIsCreate,
       }}
@@ -58,6 +68,7 @@ export const NoteTabPanelProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// 正しいフック
 export const useNoteTabPanelContext = () => {
   const context = useContext(NoteTabPanelContext);
   if (!context) {

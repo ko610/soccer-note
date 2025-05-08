@@ -4,15 +4,12 @@ import { Tabs, Tab, Box } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { NoteType } from "@/types/note/Note";
 import { theme } from "@/styles/theme";
+import { useNoteTabPanelContext } from "@/features/note/contexts/NoteTabPanelContext";
 
-type PageProps = {
-    notes: NoteType[],
-    tabValue: number,
-    setTabValue: (tabValue: number) => void,
-    setIsCreate: (isCreate: boolean) => void
-}
 
-export default function NoteTabs({ notes, tabValue, setTabValue, setIsCreate }: PageProps) {
+export default function NoteTabs() {
+    const { notes, tabValue, setTabValue, setIsCreate } = useNoteTabPanelContext();
+
     const handleTabChange = (event: SyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
