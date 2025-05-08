@@ -17,7 +17,7 @@ export default function LogoutButton() {
 
     return (
         <Card sx={{ borderRadius: "10px", boxShadow: "none" }}>
-            <ConfirmModal open={logoutModalOpen} setOpen={setLogoutModalOpen} onClick={handleLogout} text={confirmModalText.logout} />
+            <ConfirmModal open={logoutModalOpen} setOpen={setLogoutModalOpen} onSubmit={handleLogout} text={confirmModalText.logout} />
             <ListItem disablePadding>
                 <ListItemButton 
                 onClick={() => setLogoutModalOpen(true)}
