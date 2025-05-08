@@ -14,6 +14,7 @@ interface NoteTabPanelContextType {
   isLoading: boolean;
   setIsLoading: (val: boolean) => void;
   date: Date;
+  boards: any[];
   isCreate: boolean;
   setIsCreate: (val: boolean) => void;
 }
@@ -59,6 +60,7 @@ export const NoteTabPanelProvider = ({
         isLoading,
         setIsLoading,
         date,
+        boards,
         isCreate,
         setIsCreate,
       }}

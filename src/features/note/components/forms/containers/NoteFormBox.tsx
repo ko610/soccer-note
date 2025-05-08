@@ -1,5 +1,6 @@
 "use client"
 
+import dayjs from 'dayjs';
 import { useParams, useRouter } from 'next/navigation'
 import { Box, Stack, Typography, CircularProgress } from '@mui/material';
 import GameForm from '@/features/note/components/forms/containers/GameForm';
@@ -18,15 +19,15 @@ type PageProps = {
     setIsLoading: (isLoading: boolean) => void,
     isCreate: boolean,
     setIsCreate: (isCreate: boolean) => void,
-    date: string,
+    date: Date,
     setTabValue: (tabValue: number) => void,
 }
 
 export default function NoteFormBox({ allNotes, setNotes, boards, isLoading, setIsLoading, isCreate, setIsCreate, date, setTabValue }: PageProps) {
     const params = useParams()
     const router = useRouter()
-    const [gameNote, setGameNote] = useState(new GameModel({date: date}));
-    const [practiceNote, setPracticeNote] = useState(new PracticeModel({date: date}));
+    const [gameNote, setGameNote] = useState(new GameModel({date: dayjs(date).format("YYYY-MM-DD")}));
+    const [practiceNote, setPracticeNote] = useState(new PracticeModel({date: dayjs(date).format("YYYY-MM-DD")}));
     const [menu, setMenu] = useState(0);
 
     const InsertNote = async (note: NoteType, selectedFiles: File[]) => {
