@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocs, serverTimestamp, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
 import { NoteType } from "@/types/note/Note";
 import { GameModel } from "@/types/note/game/Game";
@@ -41,4 +41,10 @@ export const updateNote = async (note: NoteType) => {
     ...note,
     updateDate: serverTimestamp(),
   });
+};
+
+// ノートを削除する
+export const deleteNote = async (note: NoteType) => {
+  const notesRef = doc(db, "notes", note.id);
+  await deleteDoc(notesRef);
 };
