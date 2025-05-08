@@ -7,12 +7,11 @@ import LoadingPage from '@/components/ui/LoadingPage';
 import LeftNavigationBar from '@/components/layouts/navigationBar/LeftNavigationBar';
 import BottomNavigationBar from '@/components/layouts/navigationBar/BottomNavigationBar';
 import NoteHeader from '@/features/note/components/layouts/NoteHeader';
-import NoteMainContainer from '@/features/note/components/layouts/NoteMainContainer';
-import { useGetAuth } from '@/features/auth/hooks/useGetAuth';
+import NoteMainContainer from '@/features/note/components/layouts/NoteMainContainer'
 import { useAuth } from '@/features/auth/contexts/AuthContext';
+import NoteSwitcher from '@/features/note/components/container/NoteSwitcher';
 
 export default function Home() {
-  const router = useRouter();
   const { user, isAuthLoading } = useAuth();
   const [date, setDate] = useState<Date>(new Date());
   const [displayMenu, setDisplayMenu] = useState<number>(0);
@@ -27,7 +26,7 @@ export default function Home() {
           <LeftNavigationBar />
           <NoteHeader date={date} setDate={setDate} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu} showCalendar={showCalendar} setShowCalendar={setShowCalendar} />
           <NoteMainContainer>
-            <h1>Home</h1>
+            <NoteSwitcher notes={[]} setNotes={() => {}} boards={[]} date={date}  />
           </NoteMainContainer>
           <BottomNavigationBar />
         </Box>

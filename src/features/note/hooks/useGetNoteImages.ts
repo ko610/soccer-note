@@ -1,15 +1,16 @@
+
+import { useState, useEffect } from 'react';
 import { storage } from '@/lib/firebase/config';
-import { ref } from 'firebase/storage';
-import { getDownloadURL } from 'firebase/storage';
-import * as React from 'react';
+import { ref, getDownloadURL } from 'firebase/storage';
 
-export const useGetNoteImages = (urls: string[], setIsImagesLoading: (isImagesLoading: boolean) => void) => {
-    const [contents, setContents] = React.useState<File[]>([]);
+export const useGetNoteImages = (urls: string[], setIsImagesLoading: (isImagesLoading: boolean) => void): [File[], (files: File[]) => void] => {
+    const [contents, setContents] = useState<File[]>([]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const init = async () => {
             setIsImagesLoading(true)
-            setContents(await fetchGameImages(urls))
+            const files = await fetchNoteImages(urls)
+            setContents(files)
             setIsImagesLoading(false)
         }
         init()
@@ -18,7 +19,7 @@ export const useGetNoteImages = (urls: string[], setIsImagesLoading: (isImagesLo
     return [contents, setContents]
 }
 
-const fetchGameImages = async (urls: string[]) => {
+const fetchNoteImages = async (urls: string[]): Promise<File[]> => {
     const files: File[] = []
 
     for (let index = 0; index < urls.length; index++) {

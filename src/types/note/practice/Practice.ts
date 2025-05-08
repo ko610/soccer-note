@@ -2,6 +2,7 @@ import { Timestamp } from "firebase/firestore"
 
 export interface PracticeType {
     id: string,
+    type: string,
     date: string,
     updateDate: Timestamp,
     createDate: Timestamp,
@@ -10,8 +11,8 @@ export interface PracticeType {
     weather: string,
     place: string,
     details: Array<string>,
-    goodPoints?: Array<string>,
-    badPoints?: Array<string>,
+    goodPoints: Array<string>,
+    badPoints: Array<string>,
     next: string,
     comment: string,
     images?: Array<string>,
@@ -21,6 +22,7 @@ export interface PracticeType {
 
 export class PracticeModel implements PracticeType {
     id: string
+    type: string = "practice"
     date: string
     createDate: Timestamp
     updateDate: Timestamp
@@ -29,8 +31,8 @@ export class PracticeModel implements PracticeType {
     weather: string 
     place: string
     details: Array<string>
-    goodPoints?: Array<string>
-    badPoints?: Array<string>
+    goodPoints: Array<string>
+    badPoints: Array<string>
     next: string
     comment: string
     images?: Array<string>
