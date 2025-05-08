@@ -1,5 +1,5 @@
+import { addDoc, collection, getDocs, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
-import { collection, getDocs } from "firebase/firestore";
 import { NoteType } from "@/types/note/Note";
 import { GameModel } from "@/types/note/game/Game";
 import { PracticeModel } from "@/types/note/practice/Practice";
@@ -23,3 +23,15 @@ export const fetchNotes = async (): Promise<NoteType[]> => {
 
   return notes;
 };
+
+// ノートを作成する
+export const createNote = async (note: NoteType) => {
+  const notesRef = collection(db, "notes");
+  await addDoc(notesRef, {
+    ...note,
+    createDate: serverTimestamp(),
+    updateDate: serverTimestamp(),
+  });
+};
+
+
