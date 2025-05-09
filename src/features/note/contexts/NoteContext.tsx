@@ -4,7 +4,7 @@ import { createContext, useContext, useState, ReactNode, useEffect } from "react
 import type { NoteType } from "@/types/note/Note";
 
 // コンテキスト型
-interface NoteTabPanelContextType {
+interface NoteContextType {
   notes: NoteType[];
   setNotes: (notes: NoteType[]) => void;
   tabValue: number;
@@ -19,10 +19,10 @@ interface NoteTabPanelContextType {
   setIsCreate: (val: boolean) => void;
 }
 
-const NoteTabPanelContext = createContext<NoteTabPanelContextType | undefined>(undefined);
+const NoteContext = createContext<NoteContextType | undefined>(undefined);
 
 // Providerのprops型
-type NoteTabPanelProviderProps = {
+type NoteProviderProps = {
   children: ReactNode;
   notes: NoteType[];
   setNotes: (notes: NoteType[]) => void;
@@ -30,13 +30,13 @@ type NoteTabPanelProviderProps = {
   date: Date;
 };
 
-export const NoteTabPanelProvider = ({
+export const NoteProvider = ({
   children,
   notes,
   setNotes,
   boards,
   date,
-}: NoteTabPanelProviderProps) => {
+}: NoteProviderProps) => {
   const [tabValue, setTabValue] = useState(0);
   const [noteCreateMenu, setNoteCreateMenu] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +49,7 @@ export const NoteTabPanelProvider = ({
   }, [date, notes]);
 
   return (
-    <NoteTabPanelContext.Provider
+    <NoteContext.Provider
       value={{
         notes,
         setNotes,
@@ -66,15 +66,14 @@ export const NoteTabPanelProvider = ({
       }}
     >
       {children}
-    </NoteTabPanelContext.Provider>
+    </NoteContext.Provider>
   );
 };
 
-// 正しいフック
-export const useNoteTabPanelContext = () => {
-  const context = useContext(NoteTabPanelContext);
+export const useNoteContext = () => {
+  const context = useContext(NoteContext);
   if (!context) {
-    throw new Error("useNoteTabPanelContext must be used within a NoteTabPanelProvider");
+    throw new Error("useNoteContext must be used within a NoteProvider");
   }
   return context;
 };

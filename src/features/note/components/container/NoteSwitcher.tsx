@@ -13,7 +13,7 @@ import { PracticeModel } from '@/types/note/practice/Practice';
 import { theme } from '@/styles/theme';
 import NoteTabs from '@/features/note/components/ui/NoteTabs';
 import NoteTabPanel from '../ui/NoteTabPanel';
-import { NoteTabPanelProvider } from '@/features/note/contexts/NoteTabPanelContext';
+import { NoteProvider } from '@/features/note/contexts/NoteContext';
 
 type PageProps = {
     notes: NoteType[],
@@ -26,10 +26,10 @@ export default function NoteSwitcher({ notes, setNotes, boards, date }: PageProp
 
     return (
         <Box sx={{ background: "white", overflowY: "scroll", overflowX: "hidden", position: "fixed", zIndex: 1000, width: "100%", maxWidth: "550px", height: "100%", left: { xs: "50%", md: "unset"}, ml: { xs: "0px", md: "120px", lg: "55px" }, transform: { xs: "translateX(-50%)", md: "translateX(0)" } }}>
-            <NoteTabPanelProvider notes={notes} setNotes={setNotes} boards={boards} date={date}>
+            <NoteProvider notes={notes} setNotes={setNotes} boards={boards} date={date}>
                 <NoteTabs />
                 <NoteTabPanel />
-            </NoteTabPanelProvider>
+            </NoteProvider>
         </Box>
     )
 }

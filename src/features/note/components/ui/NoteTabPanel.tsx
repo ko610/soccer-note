@@ -6,7 +6,7 @@ import { NoteType } from "@/types/note/Note";
 import { PracticeModel } from "@/types/note/practice/Practice";
 import GameNote from "../contents/notes/GameNote";
 import PracticeNote from "../contents/notes/PracticeNote";
-import { useNoteTabPanelContext } from "../../contexts/NoteTabPanelContext";
+import { useNoteContext } from "@/features/note/contexts/NoteContext";
 
 type TabPanelProps = {
     children?: React.ReactNode;
@@ -28,7 +28,7 @@ function CustomTabPanel(props: TabPanelProps) {
 }       
 
 export default function NoteTabPanel() {
-    const { notes, setNotes, boards, isLoading, setIsLoading, isCreate, setIsCreate, date, tabValue, setTabValue } = useNoteTabPanelContext();
+    const { notes, setNotes, boards, isLoading, setIsLoading, isCreate, setIsCreate, date, tabValue, setTabValue } = useNoteContext();
     
     console.log(tabValue)
 

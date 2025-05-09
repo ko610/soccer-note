@@ -305,7 +305,7 @@ export default function PracticeContentBox({ allNotes, practiceNote, setNotes, b
                         </>
                     }
 
-                    {practiceNote.comment != undefined &&
+                    {practiceNote != undefined && practiceNote.comment != "" &&
                         <>
                             <Divider />
                             <Box sx={{ px: 2, my: 1 }}>

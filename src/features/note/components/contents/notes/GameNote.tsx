@@ -326,7 +326,7 @@ export default function GameNote({ allNotes, gameNote, setNotes, boards, setTabV
                             )}
 
 
-                            {gameNote != undefined && gameNote.comment != undefined &&
+                            {gameNote != undefined && gameNote.comment != "" &&
                                 <>
                                     <Divider />
                                     <Box sx={{ px: 2, my: 1 }}>
