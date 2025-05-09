@@ -1,11 +1,12 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from "@/lib/firebase/config";
 import { NoteType } from "@/types/note/Note";
-import { GameModel } from "@/types/note/game/Game";
-import { PracticeModel } from "@/types/note/practice/Practice";
+import { GameModel, GameType } from "@/types/note/game/Game";
+import { PracticeModel, PracticeType } from "@/types/note/practice/Practice";
 import { getDownloadURL } from "firebase/storage";
 import { uploadBytes } from "firebase/storage";
 import { ref } from "firebase/storage";
+import { GameTeamModel, GameTeamType } from "@/types/note/game/GameTeam";
 
 // ノートを取得する
 export const fetchNotes = async (): Promise<NoteType[]> => {
@@ -29,20 +30,33 @@ export const fetchNotes = async (): Promise<NoteType[]> => {
 
 // ノートを作成する
 export const createNote = async (note: NoteType, images: File[]) => {
-  const uid = await auth.currentUser?.uid;
-  if (!uid) {
-    throw new Error("User not found");
-  }
+  try {
+    const notesRef = collection(db, "notes");
+    const imageUrls = await uploadImage(images, note.uid);
 
-  const notesRef = collection(db, "notes");
-  const imageUrls = await uploadImage(images, uid);
-  await addDoc(notesRef, {
-    ...note,
-    uid: uid,
-    imageUrls: imageUrls,
-    createDate: serverTimestamp(),
-    updateDate: serverTimestamp(),
-  });
+    console.log(note)
+
+    let dataToSave: any = {
+      ...note,
+      imageUrls,
+      createDate: serverTimestamp(),
+      updateDate: serverTimestamp(),
+    };
+
+    if (note.type === "game") {
+      const gameNote = note as GameType;
+      dataToSave.teams = gameNote.teams.map(team => {
+        if (team instanceof GameTeamModel) {
+          return team.toJSON();
+        }
+        return team; 
+      })
+    }
+
+    await addDoc(notesRef, dataToSave);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // ノートを更新する

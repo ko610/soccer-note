@@ -32,7 +32,7 @@ export default function NoteFormBox({ allNotes, setNotes, boards, isLoading, set
 
     const InsertNote = async (note: NoteType, selectedFiles: File[]) => {
         setIsLoading(true)
-        await createNote(note, selectedFiles).then( async () => {
+        await createNote(note, selectedFiles).then(async () => {
             const resultNotes = allNotes.slice()
             resultNotes.unshift(note)
             setNotes([...resultNotes])

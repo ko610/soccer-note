@@ -14,4 +14,12 @@ export class GameTeamModel implements GameTeamType {
         this.score1 = data.score1 || "";
         this.score2 = data.score2 || "";
     }
+
+    toJSON(): GameTeamType {
+        return {
+            team: this.team,
+            score1: this.score1,
+            score2: this.score2,
+        };
+      }
 }
