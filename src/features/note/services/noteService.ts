@@ -1,8 +1,12 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp, updateDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase/config";
+import { auth, db, storage } from "@/lib/firebase/config";
 import { NoteType } from "@/types/note/Note";
-import { GameModel } from "@/types/note/game/Game";
-import { PracticeModel } from "@/types/note/practice/Practice";
+import { GameModel, GameType } from "@/types/note/game/Game";
+import { PracticeModel, PracticeType } from "@/types/note/practice/Practice";
+import { getDownloadURL } from "firebase/storage";
+import { uploadBytes } from "firebase/storage";
+import { ref } from "firebase/storage";
+import { GameTeamModel, GameTeamType } from "@/types/note/game/GameTeam";
 
 // ノートを取得する
 export const fetchNotes = async (): Promise<NoteType[]> => {
@@ -25,20 +29,48 @@ export const fetchNotes = async (): Promise<NoteType[]> => {
 };
 
 // ノートを作成する
-export const createNote = async (note: NoteType) => {
-  const notesRef = collection(db, "notes");
-  await addDoc(notesRef, {
-    ...note,
-    createDate: serverTimestamp(),
-    updateDate: serverTimestamp(),
-  });
+export const createNote = async (note: NoteType, images: File[]) => {
+  try {
+    const notesRef = collection(db, "notes");
+    const imageUrls = await uploadImage(images, note.uid);
+
+    console.log(note)
+
+    let dataToSave: any = {
+      ...note,
+      imageUrls,
+      createDate: serverTimestamp(),
+      updateDate: serverTimestamp(),
+    };
+
+    if (note.type === "game") {
+      const gameNote = note as GameType;
+      dataToSave.teams = gameNote.teams.map(team => {
+        if (team instanceof GameTeamModel) {
+          return team.toJSON();
+        }
+        return team; 
+      })
+    }
+
+    await addDoc(notesRef, dataToSave);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // ノートを更新する
-export const updateNote = async (note: NoteType) => {
+export const updateNote = async (note: NoteType, images: File[]) => {
+  const uid = await auth.currentUser?.uid;
+  if (!uid) {
+    throw new Error("User not found");
+  }
+
   const notesRef = doc(db, "notes", note.id);
+  const imageUrls = await uploadImage(images, uid);
   await updateDoc(notesRef, {
     ...note,
+    imageUrls: imageUrls,
     updateDate: serverTimestamp(),
   });
 };
@@ -47,4 +79,22 @@ export const updateNote = async (note: NoteType) => {
 export const deleteNote = async (note: NoteType) => {
   const notesRef = doc(db, "notes", note.id);
   await deleteDoc(notesRef);
+};
+
+// 画像をアップロードする
+export const uploadImage = async (images: File[], uid: string): Promise<string[]> => {
+    const imageUrls: string[] = [];
+    for (let i = 0; images.length; i++) {
+        const file = images[i];
+        const fileName = `note/${uid}/${Date.now()}_${i}_${file.name}`;
+
+        const storageRef = ref(storage, fileName);
+        const fileBuffer = await file.arrayBuffer();
+        await uploadBytes(storageRef, new Uint8Array(fileBuffer));
+
+        const publicUrl = await getDownloadURL(storageRef);
+        imageUrls.push(publicUrl);
+    }
+
+    return imageUrls;
 };

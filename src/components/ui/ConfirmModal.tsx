@@ -16,7 +16,7 @@ type ConfirmModalText = {
   type ConfirmModalProps = {
     open: boolean;
     setOpen: (open: boolean) => void;
-    onClick: () => void;
+    onSubmit: () => void;
     text: ConfirmModalText;
   };
 
@@ -31,11 +31,11 @@ const style = {
     maxWidth: '100%'
 };
 
-export default function ConfirmModal({ open, setOpen, onClick, text }: ConfirmModalProps) {
+export default function ConfirmModal({ open, setOpen, onSubmit, text }: ConfirmModalProps) {
     const handleClose = () => setOpen(false);
 
     const SubmitButtonClick = () => {
-        onClick()
+        onSubmit()
     }
 
     const CancelButtonClick = () => {

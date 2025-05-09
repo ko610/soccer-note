@@ -35,7 +35,7 @@ export class GameModel implements GameType {
     title: string;
     weather: string;
     place: string;
-    teams: Array<GameTeamType> = [new GameTeamModel({})];
+    teams: Array<GameTeamType>;
     name1?: string;
     score1?: string;
     name2?: string;
@@ -57,7 +57,7 @@ export class GameModel implements GameType {
         this.title = data.title || "";
         this.weather = data.weather || "";
         this.place = data.place || "";
-        this.teams = data.teams || [new GameTeamModel({})];
+        this.teams = data.teams || [new GameTeamModel({})] ;
         this.name1 = data.name1 || "";
         this.score1 = data.score1 || "";
         this.name2 = data.name2 || "";
@@ -65,10 +65,10 @@ export class GameModel implements GameType {
         this.position = data.position || "";
         this.goodPoints = Array.isArray(data.goodPoints)
             ? data.goodPoints.map((item: any) => item.context ?? item) // 旧型 or 新型両対応
-            : [];
+            : [""];
         this.badPoints = Array.isArray(data.badPoints)
             ? data.badPoints.map((item: any) => item.context ?? item) // 旧型 or 新型両対応
-            : [];
+            : [""];
         this.next = data.next || "";
         this.comment = data.comment || "";
         this.images = data.images || [];
