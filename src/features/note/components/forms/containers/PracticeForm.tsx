@@ -21,13 +21,12 @@ type pageProps = {
     practiceNote: PracticeModel,
     postData: (note: NoteType, selectedFiles: File[]) => Promise<void>,
     onClose: () => void,
-    boards: any[],
     isCreate: boolean,
     menu: number,
     setMenu: (menu: number) => void
 }
 
-export default function PracticeForm({ practiceNote, postData, onClose, boards, isCreate, menu, setMenu }: pageProps) {
+export default function PracticeForm({ practiceNote, postData, onClose, isCreate, menu, setMenu }: pageProps) {
     const [isImagesLoading, setIsImagesLoading] = useState(false)
     const [note, setNote] = useState<PracticeModel>(practiceNote)
     const [selectedFiles, setSelectedFiles] = useGetNoteImages(practiceNote.images ?? [], setIsImagesLoading)

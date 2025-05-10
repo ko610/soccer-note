@@ -28,23 +28,23 @@ function CustomTabPanel(props: TabPanelProps) {
 }       
 
 export default function NoteTabPanel() {
-    const { notes, setNotes, boards, isLoading, setIsLoading, isCreate, setIsCreate, date, tabValue, setTabValue } = useNoteContext();
+    const { notes, setNotes, isLoading, setIsLoading, isCreate, setIsCreate, date, tabValue, setTabValue } = useNoteContext();
     
     console.log(tabValue)
 
     return (
         <>
             <CustomTabPanel value={tabValue} index={0}>
-                <NoteFormBox allNotes={notes} setNotes={setNotes} boards={boards} isLoading={isLoading} setIsLoading={setIsLoading} isCreate={isCreate} setIsCreate={setIsCreate} date={date} setTabValue={setTabValue} />
+                <NoteFormBox allNotes={notes} setNotes={setNotes} isLoading={isLoading} setIsLoading={setIsLoading} isCreate={isCreate} setIsCreate={setIsCreate} date={date} setTabValue={setTabValue} />
             </CustomTabPanel>
 
             {notes.map((value: NoteType, index: number) => (
                 <CustomTabPanel key={index} value={tabValue} index={index + 1}>
                     {value.type == "game" &&
-                        <GameNote allNotes={notes} gameNote={value as GameModel} setNotes={setNotes} boards={boards} setTabValue={setTabValue} />
+                        <GameNote allNotes={notes} gameNote={value as GameModel} setNotes={setNotes} setTabValue={setTabValue} />
                     }
                     {value.type == "practice" &&
-                        <PracticeNote allNotes={notes as NoteType[]} practiceNote={value as PracticeModel} setNotes={setNotes} boards={boards} setTabValue={setTabValue} />
+                        <PracticeNote allNotes={notes as NoteType[]} practiceNote={value as PracticeModel} setNotes={setNotes} setTabValue={setTabValue} />
                     }
                 </CustomTabPanel>
             ))}

@@ -14,7 +14,6 @@ interface NoteContextType {
   isLoading: boolean;
   setIsLoading: (val: boolean) => void;
   date: Date;
-  boards: any[];
   isCreate: boolean;
   setIsCreate: (val: boolean) => void;
 }
@@ -26,7 +25,6 @@ type NoteProviderProps = {
   children: ReactNode;
   notes: NoteType[];
   setNotes: (notes: NoteType[]) => void;
-  boards: any[];
   date: Date;
 };
 
@@ -34,7 +32,6 @@ export const NoteProvider = ({
   children,
   notes,
   setNotes,
-  boards,
   date,
 }: NoteProviderProps) => {
   const [tabValue, setTabValue] = useState(0);
@@ -60,7 +57,6 @@ export const NoteProvider = ({
         isLoading,
         setIsLoading,
         date,
-        boards,
         isCreate,
         setIsCreate,
       }}
