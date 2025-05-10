@@ -1,29 +1,29 @@
-import { FormControl, Typography, OutlinedInput } from "@mui/material"
-
-import { Box } from "@mui/material"
 import { useState } from "react"
+import { InputLabel, TextField, Stack } from "@mui/material"
 
+type TextFieldSectionProps = {
+    title: string,
+    value: string,
+    setValue: (value: string) => void
+}
 
-export const TextFieldSection = ({ title, value }: { title: string, value: string}) => {
-    const [inputValue, setInputValue] = useState(value)
+export const TextFieldSection = ({ title, value, setValue }: TextFieldSectionProps) => {
 
     return (
-        <Box sx={{ my: 2, px: 2 }}>
-            <Typography variant="h6" sx={{ fontSize: 13, mb: 1, color: "black" }}>
-                {title}
-                </Typography>
-                <FormControl fullWidth sx={{ fontSize: 13, mb: 4 }} variant="outlined">
-                    <OutlinedInput
-                        sx={{ fontSize: 13, py: "9px" }}
-                        multiline
-                        minRows={1}
-                        value={inputValue}
-                        onChange={newValue => {
-                            setInputValue(newValue.target.value);
-                            value = newValue.target.value;
-                        }}
-                    />
-            </FormControl>
-        </Box>
+        <Stack sx={{ mb: 1 }} direction="row" spacing={0} alignItems="center">
+            <InputLabel sx={{ fontSize: 13, width: "90px", color: "black" }} >{title}</InputLabel>
+            <TextField
+                required
+                fullWidth
+                size="small"
+                variant="standard"
+                name="title"
+                value={value}
+                onChange={newValue => {
+                    setValue(newValue.target.value)
+                }}
+                sx={{ '& .MuiInputBase-input': { fontSize: 13 } }}
+            />
+        </Stack>
     )
 }

@@ -33,6 +33,9 @@ export const ImageSelector: React.FC<ImageSelecterProps> = ({
 
     return (
         <Box>
+            <Typography variant="h6" sx={{ fontSize: 13, mb: 1, color: "black" }}>
+                画像
+            </Typography>
             {isLoading ?
                 <Stack direction="row" justifyContent="center" alignItems="center"
                     sx={{
