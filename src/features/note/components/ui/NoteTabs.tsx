@@ -77,11 +77,11 @@ export default function NoteTabs() {
                 }}
             >
                 <Tab 
-                    icon={<AddIcon sx={{ fontSize: 18, mb: 0.2, mr: "4px !important", color: theme.palette.primary.main }} />}
+                    icon={<AddIcon sx={{ fontSize: 18, mb: 0.2, mr: "4px !important", color: tabValue == 0 ? theme.palette.primary.main : "gray" }} />}
                     iconPosition="start"
                     label="新規作成"
                     onClick={() => setIsCreate(true)}
-                    sx={{ fontSize: 13, '&.Mui-selected': { color: theme.palette.primary.main } }}
+                    sx={{ fontSize: 13, '&.Mui-selected': { color: tabValue == 0 ? theme.palette.primary.main : "gray" } }}
                 />
                 {notes.map((value: NoteType, index: number) => (
                     <Tab 

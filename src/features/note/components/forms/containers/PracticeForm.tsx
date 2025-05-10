@@ -16,6 +16,12 @@ import { ImageSelector } from '../inputs/ImageSelector';
 import { PracticeModel } from '@/types/note/practice/Practice';
 import { NoteType } from '@/types/note/Note';
 import { theme } from '@/styles/theme';
+import { TextFieldSection } from '../inputs/TextFieldSection';
+import { SelectSection } from '../inputs/SelectSection';
+import { TextAreaSection } from '../inputs/TextAreaSection';
+import SubmitButtonBox from '../ui/SubmitButtonBox';
+import { AddableTextFieldSection } from '../inputs/AddableTextFieldSection';
+import { GameModel } from '@/types/note/game/Game';
 
 type pageProps = {
     practiceNote: PracticeModel,
@@ -27,9 +33,9 @@ type pageProps = {
     setMenu: (menu: number) => void
 }
 
-    export default function PracticeForm({ practiceNote, postData, onClose, boards, isCreate, menu, setMenu }: pageProps) {
-    const router = useRouter()
-    const params = useParams()
+export default function PracticeForm({ practiceNote, postData, onClose, boards, isCreate, menu, setMenu }: pageProps) {
+    const [note, setNote] = useState<PracticeModel>(practiceNote)
+
     const [isConfirmCloseModal, setIsConfirmCloseModal] = useState<boolean>(false)
     const [waitFlag, setWaitFlag] = useState(false);
     const [isImagesLoading, setIsImagesLoading] = useState(false)
@@ -224,189 +230,33 @@ type pageProps = {
 
                     <Divider />
 
-                    <Box sx={{ my: 1 }}>
-                        <Stack sx={{ mb: 1, px: 2 }} direction="row" spacing={0} alignItems="center">
-                            <InputLabel sx={{ fontSize: 13, width: "90px", color: "black" }} >タイトル</InputLabel>
-                            <TextField
-                                required
-                                fullWidth
-                                size="small"
-                                variant="standard"
-                                name="title"
-                                value={practiceNote.title}
-                                onChange={newValue => {
-                                    setTitle(newValue.target.value)
-                                    practiceNote.title = newValue.target.value
-                                }}
-                                inputProps={{style: {fontSize: 13}}}
-                            />
-                        </Stack>
+                    <Box sx={{ my: 1, px: 2 }}>
+                        <TextFieldSection title="タイトル" value={note.title} setValue={(value) => {setNote(new PracticeModel({...note, title: value}))}} />
 
-                        <Stack sx={{ mb: 1, px: 2 }} direction="row" spacing={0} alignItems="center">
-                            <InputLabel sx={{ fontSize: 13, width: "90px", color: "black" }} >場所</InputLabel>
-                            <TextField
-                                inputProps={{style: {fontSize: 13}}}
-                                fullWidth
-                                variant="standard"
-                                size="small"
-                                name="place"
-                                value={practiceNote.place}
-                                onChange={newValue => {
-                                    setPlace(newValue.target.value)
-                                    practiceNote.place = newValue.target.value
-                                }}
-                            />
-                        </Stack>
+                        <TextFieldSection title="場所" value={note.place} setValue={(value) => {setNote(new PracticeModel({...note, place: value}))}} />
 
-                        <Stack sx={{ mb: 1, px: 2 }} direction="row" spacing={0} alignItems="center">
-                            <InputLabel sx={{ fontSize: 13, width: "90px", color: "black" }} >天気</InputLabel>
-                            <Select
-                                sx={{ fontSize: 13, backgroundColor: "background.paper", mx: 1 }}
-                                variant="standard"
-                                name="weather"
-                                size="small"
-                                fullWidth
-                                value={practiceNote.weather}
-                                onChange={newValue => {
-                                    setWeather(newValue.target.value)
-                                    practiceNote.weather = newValue.target.value
-                                }}
-                            >
-                                <MenuItem sx={{ fontSize: 13 }} value="晴れ">晴れ</MenuItem>
-                                <MenuItem sx={{ fontSize: 13 }} value="曇り">曇り</MenuItem>
-                                <MenuItem sx={{ fontSize: 13 }} value="雨">雨</MenuItem>
-                                <MenuItem sx={{ fontSize: 13 }} value="雪">雪</MenuItem>
-                            </Select>
-                        </Stack>
+                        <SelectSection title="天気" value={note.weather} setValue={(value) => {setNote(new PracticeModel({...note, weather: value}))}} options={["晴れ", "曇り", "雨", "雪"]} />
+                    </Box>
+
+                    <Divider />
+
+                    <Box sx={{ my: 1, px: 2 }}>
+                        <AddableTextFieldSection title="練習内容" placeholder="" values={note.details} setValues={(value) => {setNote(new PracticeModel({...note, details: value}))}} titleColor="black"  />
+                    </Box>
+
+                    <Divider />
+
+                    <Box sx={{ my: 1, px: 2 }}>
+                        <AddableTextFieldSection title="良い点" placeholder="良かったところや良かったプレーなど" values={note.goodPoints} setValues={(value) => {setNote(new PracticeModel({...note, goodPoints: value}))}} titleColor="#ff5e00" fontWeight="bold" />
+
+                        <AddableTextFieldSection title="悪い点" placeholder="悪かったところや悪かったプレーなど" values={note.badPoints} setValues={(value) => {setNote(new PracticeModel({...note, badPoints: value}))}} titleColor="#007eff" fontWeight="bold" />
+
+                        <TextAreaSection title="次に向けて" placeholder="次に向けての目標や取り組むことなど" value={note.next} setValue={(value) => {setNote(new PracticeModel({...note, next: value}))}} titleColor="#16b41e" fontWeight="bold" />
                     </Box>
 
                     <Divider />
 
                     <Box sx={{ my: 2, px: 2 }}>
-                        <Box sx={{ mb: 1 }}>
-                            <Stack sx={{ mb: 1 }} spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-                                <InputLabel sx={{ mb: 1, fontSize: 13, color: "black" }} >練習内容</InputLabel>
-                                <IconButton size="small" sx={{ color: theme.palette.primary.main }} onClick={AddDetails}>
-                                    <AddCircleOutlineIcon sx={{ width: "20px", height: "20px"  }} /> 
-                                </IconButton>
-                            </Stack>
-                            {practiceNote.details.map((text: string, index: number) => (
-                                <FormControl key={index} fullWidth sx={{ mb: 1 }}>
-                                    <OutlinedInput
-                                        multiline
-                                        minRows={1}
-                                        value={practiceNote.details[index]}
-                                        onChange={newValue => ChangeDetailsContext(newValue.target.value, index)}
-                                        sx={{ fontSize: 13, py: "9px" }}
-                                    />
-                                    {index != 0 && !practiceNote.details[index] &&
-                                        <IconButton onClick={() => deleteDetail(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
-                                            <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
-                                        </IconButton>
-                                    }
-                                </FormControl>
-                            ))}
-                        </Box>
-
-                        {/* <AddInputBox title="取り組んだこと" practiceNote={practiceNote.details} ChangeInput={ChangeDetails} AddInput={AddDetails} /> */}
-                    </Box>
-
-                    <Divider />
-
-                    <Box sx={{ my: 2, px: 2 }}>
-                        <Box sx={{ my: 1 }}>
-                            <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
-                                <InputLabel sx={{ mx: 1, fontSize: 13, color: "#ff5e00", fontWeight: "bold" }}>良い点</InputLabel>
-                                <IconButton size="small" sx={{ color: theme.palette.primary.main }} onClick={AddGoodPoints}>
-                                    <AddCircleOutlineIcon sx={{ width: "20px", height: "20px"  }} /> 
-                                </IconButton>
-                            </Stack>
-                            {practiceNote.goodPoints.map((text: string, index: number) => (
-                                <FormControl key={index} fullWidth sx={{ mb: 1, position: "relative" }}>
-                                    <OutlinedInput
-                                        multiline
-                                        minRows={1}
-                                        value={practiceNote.goodPoints[index]}
-                                        onChange={newValue => ChangeGoodPointsContext(newValue.target.value, index)}
-                                        sx={{ fontSize: 13, py: "9px" }}
-                                        placeholder={index == 0 ? "良かったところや良かったプレーなど" : ""}
-                                        startAdornment
-                                    />
-                                    {index != 0 && !practiceNote.goodPoints[index] &&
-                                        <IconButton onClick={() => deleteGoodPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
-                                            <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
-                                        </IconButton>
-                                    }
-                                </FormControl>
-                            ))}
-                        </Box>
-
-                        <Box sx={{ my: 1 }}>
-                            <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ alignItems: "center", mb: 1 }}>
-                                <InputLabel sx={{ mx: 1, fontSize: 13, color: "#007eff", fontWeight: "bold" }}>悪い点</InputLabel>
-                                <IconButton size="small" sx={{ color: theme.palette.primary.main }} onClick={AddBadPoints}>
-                                    <AddCircleOutlineIcon sx={{ width: "20px", height: "20px"  }} /> 
-                                </IconButton>
-                            </Stack>
-                            {practiceNote.badPoints.map((text: string, index: number) => (
-                                <FormControl key={index} fullWidth sx={{ mb: 1 }}>
-                                    <OutlinedInput
-                                        multiline
-                                        minRows={1}
-                                        value={practiceNote.badPoints[index]}
-                                        onChange={newValue => ChangeBadPointsContext(newValue.target.value, index)}
-                                        sx={{ fontSize: 13, py: "9px" }}
-                                        placeholder={index == 0 ? "悪かったところや悪かったプレーなど" : ""}
-                                    />
-                                    {index != 0 && !practiceNote.badPoints[index] &&
-                                        <IconButton onClick={() => deleteBadPoint(index)} sx={{ position: "absolute", right: "-5px", top: "-5px", p: 0, backgroundColor: "white !important" }}>
-                                            <HighlightOffIcon sx={{ width: "20px", height: "20px" }} />
-                                        </IconButton>
-                                    }
-                                </FormControl>
-                            ))}
-                        </Box>
-
-                        <Box sx={{ my: 1 }}>
-                            <InputLabel sx={{ mb: 1, fontSize: 13, color: "#16b41e", fontWeight: "bold" }}>次に向けて</InputLabel>
-                            <FormControl fullWidth sx={{ fontSize: 13 }} variant="outlined">
-                                <OutlinedInput
-                                    sx={{ m: "0 !important", fontSize: 13, py: "9px" }}
-                                    multiline
-                                    minRows={1}
-                                    value={practiceNote.next}
-                                    onChange={newValue => {
-                                        setNext(newValue.target.value)
-                                        practiceNote.next = newValue.target.value
-                                    }}
-                                    placeholder='次に向けての目標や取り組むことなど'
-                                />
-                            </FormControl>
-                        </Box>
-                    </Box>
-
-                    <Divider />
-
-                    {/* <Box sx={{ my: 2, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 13, mb: 0.5, color: "black" }}>
-                            ボード
-                        </Typography>
-                        <Typography variant="h6" sx={{ fontSize: 12, mb: 1, color: "#888" }}>
-                            記録日のボードを選択することができます
-                        </Typography>
-                        <BoardSelectForm
-                            boards={boards}
-                            selectedBoards={selectedBoardIds}
-                            onBoardSelect={onBoardSelect}
-                        />
-                    </Box> */}
-
-                    <Divider />
-
-                    <Box sx={{ my: 2, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 13, mb: 1, color: "black" }}>
-                            画像
-                        </Typography>
                         <ImageSelector
                             selectedFiles={selectedFiles}
                             setSelectedFiles={setSelectedFiles}
@@ -418,35 +268,11 @@ type pageProps = {
                     <Divider />
 
                     <Box sx={{ my: 2, px: 2 }}>
-                        <Typography variant="h6" sx={{ fontSize: 13, mb: 1, color: "black" }} component="div">
-                            コメント
-                        </Typography>
-                        <FormControl fullWidth sx={{ fontSize: 13 }} variant="outlined">
-                            <OutlinedInput
-                                sx={{ fontSize: 13, py: "9px" }}
-                                multiline
-                                minRows={1}
-                                value={practiceNote.comment}
-                                onChange={newValue => {
-                                    setComment(newValue.target.value)
-                                    practiceNote.comment = newValue.target.value
-                                }}
-                                notched={practiceNote.comment != ""}
-                            />
-                        </FormControl>
+                        <TextAreaSection title="コメント" placeholder="" value={note.comment} setValue={(value) => {setNote(new PracticeModel({...note, comment: value}))}} titleColor="black"  />
                     </Box>
-                </Box >
-
-                <Box sx={{ position: 'sticky', bottom: { xs: "135px", md: "80px" }, left: 0, right: 0, backgroundColor: "white", zIndex: 100 }}>
-                    <Divider />
-                    <Stack justifyContent="center" alignItems="center" sx={{ height: "50px" }} >
-                        <Button size="small" fullWidth sx={{ width: "90%", borderRadius: "10px", cursor: isImagesLoading ? "pointer" : "default", backgroundColor: isImagesLoading ? "#aaa !important" : "#2e7d32 !important" }} type='submit'>
-                            <Typography fontSize={13} component="p">
-                                記録する
-                            </Typography>
-                        </Button>
-                    </Stack>
                 </Box>
+
+                <SubmitButtonBox isImagesLoading={isImagesLoading} />
             </Box >
         </>
     )

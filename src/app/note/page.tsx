@@ -11,7 +11,7 @@ import { useAuth } from '@/features/auth/contexts/AuthContext';
 import NoteSwitcher from '@/features/note/components/container/NoteSwitcher';
 import { useNotes } from '@/features/note/hooks/useNotes';
 
-export default function Home() {
+export default function NotePage() {
   const { isAuthLoading } = useAuth();
   const [date, setDate] = useState<Date>(new Date());
   const [displayMenu, setDisplayMenu] = useState<number>(0);
