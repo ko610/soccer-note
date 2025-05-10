@@ -11,14 +11,14 @@ type PageProps = {
     note: NoteType,
     editButtonClick: () => void,
     deleteButtonClick: () => void,
-    sharerText: string
+    sharerText: string,
 }
 
 export default function NoteContentsHeader( {
     note,
     editButtonClick,
     deleteButtonClick,
-    sharerText
+    sharerText,
 } : PageProps) {
 
     const router = useRouter()
@@ -37,10 +37,10 @@ export default function NoteContentsHeader( {
                             <IconButton onClick={deleteButtonClick} size='small' sx={{ width: "30px", height: "30px", my: "auto !important" }}><DeleteIcon sx={{ fontSize: "1.25rem" }} /></IconButton>
                             <IconButton>
                                     {note.uid == user?.uid &&
-                                    <a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/practice/${note.id}?openExternalBrowser=1&text=${sharerText} - 練習:${note.title}`} target="_blank" rel="nofollow noopener">
+                                    <a href={`https://social-plugins.line.me/lineit/share?url=https://cocoboard.jp/${note.type}/${note.id}?openExternalBrowser=1&text=${sharerText} - ${note.type == "game" ? "試合" : "練習"}:${note.title}`} target="_blank" rel="nofollow noopener">
                                         <CardMedia
                                             component='img'
-                                            image="/images/welcomePage/LINE-icon.png"
+                                            image="/images/note/LINE-icon.png"
                                             sx={{ width: 20, height: 20 }}
                                         />
                                     </a>
