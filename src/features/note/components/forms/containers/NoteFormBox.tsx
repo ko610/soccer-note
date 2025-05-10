@@ -14,7 +14,6 @@ import { PracticeModel } from '@/types/note/practice/Practice';
 type PageProps = {
     allNotes: NoteType[],
     setNotes: (notes: NoteType[]) => void,
-    boards: any[],
     isLoading: boolean,
     setIsLoading: (isLoading: boolean) => void,
     isCreate: boolean,
@@ -23,7 +22,7 @@ type PageProps = {
     setTabValue: (tabValue: number) => void,
 }
 
-export default function NoteFormBox({ allNotes, setNotes, boards, isLoading, setIsLoading, isCreate, setIsCreate, date, setTabValue }: PageProps) {
+export default function NoteFormBox({ allNotes, setNotes, isLoading, setIsLoading, isCreate, setIsCreate, date, setTabValue }: PageProps) {
     const params = useParams()
     const router = useRouter()
     const [gameNote, setGameNote] = useState(new GameModel({date: dayjs(date).format("YYYY-MM-DD")}));
@@ -47,7 +46,6 @@ export default function NoteFormBox({ allNotes, setNotes, boards, isLoading, set
                 <GameForm 
                     gameNote={gameNote} 
                     postData={InsertNote} 
-                    boards={boards} 
                     onClose={() => setIsCreate(false)} 
                     isCreate={true} 
                     menu={menu} 
@@ -59,7 +57,6 @@ export default function NoteFormBox({ allNotes, setNotes, boards, isLoading, set
                 <PracticeForm 
                     practiceNote={practiceNote} 
                     postData={InsertNote} 
-                    boards={boards} 
                     onClose={() => setIsCreate(false)} 
                     isCreate={true} 
                     menu={menu} 

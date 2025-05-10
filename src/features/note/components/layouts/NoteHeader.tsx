@@ -26,13 +26,11 @@ const barStyle = {
 type PageProps = {
     date: Date
     setDate: (date: Date) => void
-    displayMenu: number
-    setDisplayMenu: (menu: number) => void
     showCalendar: boolean
     setShowCalendar: (show: boolean) => void
 }
 
-export default function NoteHeader({ date, setDate, displayMenu, setDisplayMenu, showCalendar, setShowCalendar }: PageProps) {
+export default function NoteHeader({ date, setDate, showCalendar, setShowCalendar }: PageProps) {
     const currentMonth = startOfMonth(new Date());
     const currentDate = new Date();
     
@@ -90,19 +88,6 @@ export default function NoteHeader({ date, setDate, displayMenu, setDisplayMenu,
                     <ArrowRightIcon />
                 </IconButton>
             </Stack>
-            <StyledTabs 
-                value={displayMenu} 
-                onChange={(_, newValue) => setDisplayMenu(newValue)}
-            >
-                <StyledTab 
-                    label="ノート" 
-                    sx={{ height: 25, m: "auto", fontSize: 12, fontWeight: 600 }} 
-                />
-                <StyledTab 
-                    label="ボード" 
-                    sx={{ height: 25, m: "auto", fontSize: 12, fontWeight: 600 }} 
-                />
-            </StyledTabs>
         </AppBar>
     );
 }

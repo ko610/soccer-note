@@ -29,8 +29,6 @@ export default function NotePage() {
         <NoteHeader 
           date={date} 
           setDate={setDate} 
-          displayMenu={displayMenu} 
-          setDisplayMenu={setDisplayMenu} 
           showCalendar={showCalendar} 
           setShowCalendar={setShowCalendar} 
         />
@@ -39,7 +37,6 @@ export default function NotePage() {
             <NoteSwitcher 
               notes={notes} 
               setNotes={setNotes} 
-              boards={[]} 
               date={date} 
             />
           </NoteMainContainer>

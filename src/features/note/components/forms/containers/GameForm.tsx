@@ -23,13 +23,12 @@ type pageProps = {
     gameNote: GameModel,
     postData: (note: NoteType, selectedFiles: File[]) => Promise<void>,
     onClose: () => void,
-    boards: any[],
     isCreate: boolean,
     menu: number,
     setMenu: (menu: number) => void
 }
 
-export default function GameForm({ gameNote, postData, onClose, boards, isCreate, menu, setMenu }: pageProps) {
+export default function GameForm({ gameNote, postData, onClose, isCreate, menu, setMenu }: pageProps) {
     const [isConfirmCloseModal, setIsConfirmCloseModal] = useState<boolean>(false)
     const [isImagesLoading, setIsImagesLoading] = useState(false)
 

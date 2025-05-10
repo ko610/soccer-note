@@ -22,11 +22,10 @@ type PageProps = {
     allNotes: NoteType[],
     setNotes: (notes: NoteType[]) => void,
     practiceNote: PracticeModel,
-    boards: any[],
     setTabValue: (tabValue: number) => void
 }
 
-export default function PracticeContentBox({ allNotes, practiceNote, setNotes, boards, setTabValue }: PageProps) {
+export default function PracticeContentBox({ allNotes, practiceNote, setNotes, setTabValue }: PageProps) {
     const router = useRouter()
     const [isEditLoading, setIsEditLoading] = React.useState(false)
 
@@ -79,7 +78,6 @@ export default function PracticeContentBox({ allNotes, practiceNote, setNotes, b
                         <PracticeForm 
                             practiceNote={practiceNote} 
                             postData={updatePracticeContent} 
-                            boards={boards} 
                             onClose={() => setEditModalOpen(false)} 
                             isCreate={false}
                             menu={-1}

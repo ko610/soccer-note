@@ -24,11 +24,10 @@ type PageProps = {
     allNotes: NoteType[],
     gameNote: GameModel,
     setNotes: (notes: NoteType[]) => void,
-    boards: any[],
     setTabValue: (tabValue: number) => void
 }
 
-export default function GameNote({ allNotes, gameNote, setNotes, boards, setTabValue }: PageProps) {
+export default function GameNote({ allNotes, gameNote, setNotes, setTabValue }: PageProps) {
     const router = useRouter()
     const [isEditLoading, setIsEditLoading] = useState(false)
 
@@ -81,7 +80,6 @@ export default function GameNote({ allNotes, gameNote, setNotes, boards, setTabV
                         <GameForm 
                             gameNote={gameNote} 
                             postData={updateGameContent} 
-                            boards={boards} 
                             onClose={() => setEditModalOpen(false)} 
                             isCreate={false}
                             menu={-1}
