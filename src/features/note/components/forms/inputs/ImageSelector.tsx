@@ -97,10 +97,10 @@ export const ImageSelector: React.FC<ImageSelecterProps> = ({
                                                 width: 150,
                                                 height: 150,
                                                 borderRadius: 2,
-                                                background: "rgba(25, 118, 210, 0.08) !important",
+                                                background: "rgba(17, 119, 52, 0.08) !important",
                                                 color: theme.palette.primary.main,
                                                 '&:hover': {
-                                                    background: "rgba(25, 118, 210, 0.12) !important",
+                                                    background: "rgba(17, 119, 52, 0.12) !important", 
                                                 }
                                             }}
                                         >
