@@ -3,7 +3,7 @@ import { useAuth } from '@/features/auth/contexts/AuthContext';
 import { fetchNotes } from '../services/noteService';
 import { NoteType } from '@/types/note/Note';
 
-export const useNotes = (date: Date) => {
+export const useNotes = () => {
   const { user } = useAuth();
   const [notes, setNotes] = useState<NoteType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +25,7 @@ export const useNotes = (date: Date) => {
     };
 
     loadNotes();
-  }, [user, date]);
+  }, [user]);
 
   return { notes, setNotes, isLoading, error };
 }; 
