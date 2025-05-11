@@ -18,11 +18,10 @@ import { NoteProvider } from '@/features/note/contexts/NoteContext';
 type PageProps = {
     notes: NoteType[],
     setNotes: (notes: NoteType[]) => void,
-    date: Date,
+    date: string
 }
 
 export default function NoteSwitcher({ notes, setNotes, date }: PageProps) {
-
     return (
         <Box sx={{ background: "white", overflowY: "scroll", overflowX: "hidden", position: "fixed", zIndex: 1000, width: "100%", maxWidth: "550px", height: "100%", left: { xs: "50%", md: "unset"}, ml: { xs: "0px", md: "120px", lg: "55px" }, transform: { xs: "translateX(-50%)", md: "translateX(0)" } }}>
             <NoteProvider notes={notes} setNotes={setNotes} date={date}>

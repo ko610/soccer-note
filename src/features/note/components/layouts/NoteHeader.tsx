@@ -9,6 +9,7 @@ import ClearIcon from '@mui/icons-material/Clear'
 import { dateFormat } from '@/utils/date/dateFormat';
 import { isToday } from '@/utils/date/isToday';
 import { theme } from '@/styles/theme';
+import dayjs from 'dayjs';
 
 const barStyle = {
     width: "100%",
@@ -24,8 +25,8 @@ const barStyle = {
 }
 
 type PageProps = {
-    date: Date
-    setDate: (date: Date) => void
+    date: string
+    setDate: (date: string) => void
     showCalendar: boolean
     setShowCalendar: (show: boolean) => void
 }
@@ -35,15 +36,15 @@ export default function NoteHeader({ date, setDate, showCalendar, setShowCalenda
     const currentDate = new Date();
     
     const handleDateChange = (newDate: Date) => {
-        if (!isAfter(newDate, currentDate)) {
-            setDate(newDate);
+        if (!isAfter(newDate, dayjs(currentDate).toISOString())) {
+            setDate(dayjs(newDate).format('YYYY-MM-DD'));
         }
     };
 
     const handleMonthChange = (newDate: Date) => {
         const nextMonthDate = startOfMonth(newDate);
-        if (!isAfter(nextMonthDate, currentMonth)) {
-            setDate(nextMonthDate);
+        if (!isAfter(nextMonthDate, dayjs(currentMonth).toISOString())) {
+            setDate(dayjs(nextMonthDate).format('YYYY-MM-DD'));
         }
     };
 
@@ -75,7 +76,7 @@ export default function NoteHeader({ date, setDate, showCalendar, setShowCalenda
                     <Typography component="h2" fontSize={15}>
                         {showCalendar 
                             ? format(date, 'yyyy年 M月')
-                            : dateFormat(date.toISOString())
+                            : dateFormat(dayjs(date).toISOString())
                         }
                     </Typography>
                 </Stack>
