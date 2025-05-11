@@ -18,15 +18,15 @@ type PageProps = {
     setIsLoading: (isLoading: boolean) => void,
     isCreate: boolean,
     setIsCreate: (isCreate: boolean) => void,
-    date: Date,
+    date: string,
     setTabValue: (tabValue: number) => void,
 }
 
 export default function NoteFormBox({ allNotes, setNotes, isLoading, setIsLoading, isCreate, setIsCreate, date, setTabValue }: PageProps) {
     const params = useParams()
     const router = useRouter()
-    const [gameNote, setGameNote] = useState(new GameModel({date: dayjs(date).format("YYYY-MM-DD")}));
-    const [practiceNote, setPracticeNote] = useState(new PracticeModel({date: dayjs(date).format("YYYY-MM-DD")}));
+    const [gameNote, setGameNote] = useState(new GameModel({date: date}));
+    const [practiceNote, setPracticeNote] = useState(new PracticeModel({date: date}));
     const [menu, setMenu] = useState(0);
 
     const InsertNote = async (note: NoteType, selectedFiles: File[]) => {

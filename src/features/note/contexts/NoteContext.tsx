@@ -13,9 +13,10 @@ interface NoteContextType {
   setNoteCreateMenu: (val: number) => void;
   isLoading: boolean;
   setIsLoading: (val: boolean) => void;
-  date: Date;
   isCreate: boolean;
   setIsCreate: (val: boolean) => void;
+  date: string;
+  filterNote: NoteType[];
 }
 
 const NoteContext = createContext<NoteContextType | undefined>(undefined);
@@ -25,7 +26,7 @@ type NoteProviderProps = {
   children: ReactNode;
   notes: NoteType[];
   setNotes: (notes: NoteType[]) => void;
-  date: Date;
+  date: string;
 };
 
 export const NoteProvider = ({
@@ -36,14 +37,20 @@ export const NoteProvider = ({
 }: NoteProviderProps) => {
   const [tabValue, setTabValue] = useState(0);
   const [noteCreateMenu, setNoteCreateMenu] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isCreate, setIsCreate] = useState(false);
+  const [filterNote, setFilterNote] = useState<NoteType[]>([])
 
   useEffect(() => {
-    const hasNotes = notes && notes.length > 0;
+    setIsLoading(true)
+    const filterNotes = notes.filter(note => note.date == date)
+    const hasNotes = filterNotes && filterNotes.length > 0;
     setTabValue(hasNotes ? 1 : 0);
     setIsCreate(!hasNotes);
-  }, [date, notes]);
+    setFilterNote(filterNotes)
+    setIsLoading(false)
+  }, [notes, date]);
+
 
   return (
     <NoteContext.Provider
@@ -56,9 +63,10 @@ export const NoteProvider = ({
         setNoteCreateMenu,
         isLoading,
         setIsLoading,
-        date,
         isCreate,
         setIsCreate,
+        date,
+        filterNote,
       }}
     >
       {children}
