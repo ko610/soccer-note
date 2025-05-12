@@ -1,6 +1,12 @@
-# coco-board
+# soccer-note
 
+## 概要
 **サッカーの練習・試合・戦術の記録を簡単に管理できる、ノートアプリ**です。  
+サッカー記録アプリcoco-boardのリファクタリングも兼ねて開発しています。
+cocoboard：https://cocoboard.jp
+
+## URL
+https://https://soccer-note.vercel.app/
 
 ## 主な機能
 
